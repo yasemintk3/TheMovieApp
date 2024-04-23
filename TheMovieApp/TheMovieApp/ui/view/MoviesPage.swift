@@ -29,17 +29,16 @@ class MoviesPage: UIViewController {
 
     func collectionViewDesign() {
         
-        let tasarim = UICollectionViewFlowLayout()
-        tasarim.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        tasarim.minimumInteritemSpacing = 4
-        //tasarim.minimumLineSpacing = 10
+        let design = UICollectionViewFlowLayout()
+        design.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        design.minimumInteritemSpacing = 4
         
-        let ekranGenislik = UIScreen.main.bounds.width
-        let itemGenislik = ekranGenislik
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth
         
-        tasarim.itemSize = CGSize(width: itemGenislik, height: itemGenislik / 1.78)
+        design.itemSize = CGSize(width: itemWidth, height: itemWidth / 1.78)
         
-        collectionView.collectionViewLayout = tasarim
+        collectionView.collectionViewLayout = design
     }
 }
 
@@ -66,7 +65,6 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
         default:
             break
         }
-        
         return cell
     }
 }

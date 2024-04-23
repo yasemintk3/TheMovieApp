@@ -31,18 +31,17 @@ class ViewCell: UICollectionViewCell {
     
     func collectionViewDesign() {
         
-        let tasarim = UICollectionViewFlowLayout()
-        tasarim.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        //tasarim.minimumInteritemSpacing = 10
-        tasarim.minimumLineSpacing = 10
-        tasarim.scrollDirection = .horizontal
+        let design = UICollectionViewFlowLayout()
+        design.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        design.minimumLineSpacing = 10
+        design.scrollDirection = .horizontal
         
-        let ekranGenislik = UIScreen.main.bounds.width
-        let itemGenislik = ekranGenislik
+        let screenWidth = UIScreen.main.bounds.width
+        let itemWidth = screenWidth
         
-        tasarim.itemSize = CGSize(width: itemGenislik / 4, height: itemGenislik / 2.1)
+        design.itemSize = CGSize(width: itemWidth / 4, height: itemWidth / 2.1)
         
-        moviesCollectionView.collectionViewLayout = tasarim
+        moviesCollectionView.collectionViewLayout = design
     }
 }
 
