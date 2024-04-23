@@ -30,14 +30,14 @@ class MoviesPage: UIViewController {
     func collectionViewDesign() {
         
         let tasarim = UICollectionViewFlowLayout()
-        tasarim.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        tasarim.minimumInteritemSpacing = 10
+        tasarim.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tasarim.minimumInteritemSpacing = 4
         //tasarim.minimumLineSpacing = 10
         
         let ekranGenislik = UIScreen.main.bounds.width
         let itemGenislik = ekranGenislik
         
-        tasarim.itemSize = CGSize(width: itemGenislik, height: itemGenislik / 1.85)
+        tasarim.itemSize = CGSize(width: itemGenislik, height: itemGenislik / 1.78)
         
         collectionView.collectionViewLayout = tasarim
     }

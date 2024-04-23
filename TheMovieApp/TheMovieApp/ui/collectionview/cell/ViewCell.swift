@@ -20,21 +20,34 @@ class ViewCell: UICollectionViewCell {
         
         moviesCollectionView.delegate = self
         moviesCollectionView.dataSource = self
+        
+        collectionViewDesign()
     }
     
     func updateList(list: [String : [Result]]) {
         self.moviesList = list
         self.moviesCollectionView.reloadData()
     }
+    
+    func collectionViewDesign() {
+        
+        let tasarim = UICollectionViewFlowLayout()
+        tasarim.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        //tasarim.minimumInteritemSpacing = 10
+        tasarim.minimumLineSpacing = 10
+        tasarim.scrollDirection = .horizontal
+        
+        let ekranGenislik = UIScreen.main.bounds.width
+        let itemGenislik = ekranGenislik
+        
+        tasarim.itemSize = CGSize(width: itemGenislik / 4, height: itemGenislik / 2.1)
+        
+        moviesCollectionView.collectionViewLayout = tasarim
+    }
 }
 
-extension ViewCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        CGSize(width: 128, height: 128)
-    }
-    
+extension ViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         for (key, value) in moviesList {
