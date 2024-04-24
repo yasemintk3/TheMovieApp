@@ -8,15 +8,21 @@
 import Foundation
 import Alamofire
 
-protocol RepositoryProtocol {
-    func uploadTopRated(list: [Result])
-    func uploadNowPlaying(list: [Result])
-    func uploadPopular(list: [Result])
+protocol RepositoryProtocolMovies {
+    func uploadTopRated(list: [ResultMovies])
+    func uploadNowPlaying(list: [ResultMovies])
+    func uploadPopular(list: [ResultMovies])
+}
+
+protocol RepositoryProtocolTVShows {
+    func uploadTopRated(list: [ResultTVShows])
+    func uploadPopular(list: [ResultTVShows])
 }
 
 class Repository {
     
-    var repoProtocol: RepositoryProtocol?
+    var repoProtocolMovies: RepositoryProtocolMovies?
+    var repoProtocolTVShows: RepositoryProtocolTVShows?
     
     func uploadTopRatedMovies() {
         
@@ -26,7 +32,7 @@ class Repository {
                 do {
                     let answer = try JSONDecoder().decode(Movies.self, from: data)
                     if let list = answer.results {
-                        self.repoProtocol?.uploadTopRated(list: list)
+                        self.repoProtocolMovies?.uploadTopRated(list: list)
                     }
                 } catch {
                     print(error.localizedDescription)
@@ -43,7 +49,7 @@ class Repository {
                 do {
                     let answer = try JSONDecoder().decode(Movies.self, from: data)
                     if let list = answer.results {
-                        self.repoProtocol?.uploadNowPlaying(list: list)
+                        self.repoProtocolMovies?.uploadNowPlaying(list: list)
                     }
                 } catch {
                     print(error.localizedDescription)
@@ -60,7 +66,41 @@ class Repository {
                 do {
                     let answer = try JSONDecoder().decode(Movies.self, from: data)
                     if let list = answer.results {
-                        self.repoProtocol?.uploadPopular(list: list)
+                        self.repoProtocolMovies?.uploadPopular(list: list)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func uploadTopRatedTVShows() {
+        
+        AF.request("https://api.themoviedb.org/3/tv/top_rated?api_key=7bc5ca927db5991f5c55259703847712", method: .get).response { response in
+            
+            if let data = response.data {
+                do {
+                    let answer = try JSONDecoder().decode(TVShows.self, from: data)
+                    if let list = answer.results {
+                        self.repoProtocolTVShows?.uploadTopRated(list: list)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func uploadPopularTVShows() {
+        
+        AF.request("https://api.themoviedb.org/3/tv/popular?api_key=7bc5ca927db5991f5c55259703847712", method: .get).response { response in
+            
+            if let data = response.data {
+                do {
+                    let answer = try JSONDecoder().decode(TVShows.self, from: data)
+                    if let list = answer.results {
+                        self.repoProtocolTVShows?.uploadPopular(list: list)
                     }
                 } catch {
                     print(error.localizedDescription)

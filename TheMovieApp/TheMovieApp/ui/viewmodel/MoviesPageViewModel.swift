@@ -8,9 +8,9 @@
 import Foundation
 
 protocol MoviesPageViewModelOutput {
-    func updateViewTopRated(list: [String: [Result]])
-    func updateViewNowPlaying(list: [String: [Result]])
-    func updateViewPopular(list: [String: [Result]])
+    func updateViewTopRated(list: [String: [ResultMovies]])
+    func updateViewNowPlaying(list: [String: [ResultMovies]])
+    func updateViewPopular(list: [String: [ResultMovies]])
 }
 
 class MoviesPageViewModel {
@@ -19,7 +19,7 @@ class MoviesPageViewModel {
     var output: MoviesPageViewModelOutput?
     
     init() {
-        repo.repoProtocol = self
+        repo.repoProtocolMovies = self
         uploadMovies()
     }
     
@@ -30,17 +30,17 @@ class MoviesPageViewModel {
     }
 }
 
-extension MoviesPageViewModel: RepositoryProtocol {
+extension MoviesPageViewModel: RepositoryProtocolMovies {
 
-    func uploadTopRated(list: [Result]) {
+    func uploadTopRated(list: [ResultMovies]) {
         self.output?.updateViewTopRated(list: ["1": list])
     }
     
-    func uploadNowPlaying(list: [Result]) {
+    func uploadNowPlaying(list: [ResultMovies]) {
         self.output?.updateViewNowPlaying(list: ["2": list])
     }
     
-    func uploadPopular(list: [Result]) {
+    func uploadPopular(list: [ResultMovies]) {
         self.output?.updateViewPopular(list: ["3": list])
     }
 }

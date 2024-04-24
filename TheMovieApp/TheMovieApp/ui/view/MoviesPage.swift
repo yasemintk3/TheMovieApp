@@ -12,9 +12,9 @@ class MoviesPage: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var viewModel = MoviesPageViewModel()
-    var listTopRated: [String: [Result]] = ["0": []]
-    var listNowPlaying: [String: [Result]] = ["0": []]
-    var listPopular: [String: [Result]] = ["0": []]
+    var listTopRated: [String: [ResultMovies]] = ["0": []]
+    var listNowPlaying: [String: [ResultMovies]] = ["0": []]
+    var listPopular: [String: [ResultMovies]] = ["0": []]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,7 +50,7 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "viewCell", for: indexPath) as! ViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "viewCell", for: indexPath) as! MovieViewCell
         
         switch indexPath.row {
         case 0:
@@ -71,21 +71,21 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension MoviesPage: MoviesPageViewModelOutput {
 
-    func updateViewTopRated(list: [String: [Result]]) {
+    func updateViewTopRated(list: [String: [ResultMovies]]) {
         DispatchQueue.main.async {
             self.listTopRated = list
             self.collectionView.reloadData()
         }
     }
     
-    func updateViewNowPlaying(list: [String : [Result]]) {
+    func updateViewNowPlaying(list: [String : [ResultMovies]]) {
         DispatchQueue.main.async {
             self.listNowPlaying = list
             self.collectionView.reloadData()
         }
     }
     
-    func updateViewPopular(list: [String : [Result]]) {
+    func updateViewPopular(list: [String : [ResultMovies]]) {
         DispatchQueue.main.async {
             self.listPopular = list
             self.collectionView.reloadData()

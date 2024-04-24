@@ -1,41 +1,36 @@
 //
-//  Movies.swift
+//  TVShows.swift
 //  TheMovieApp
 //
-//  Created by Yasemin TOK on 23.04.2024.
+//  Created by Yasemin TOK on 24.04.2024.
 //
 
 import Foundation
 
-// MARK: - Movies
-struct Movies: Codable {
-    let dates: Dates?
+// MARK: - TVShows
+struct TVShows: Codable {
     let page: Int?
-    let results: [ResultMovies]?
+    let results: [ResultTVShows]?
     let totalPages, totalResults: Int?
 
     enum CodingKeys: String, CodingKey {
-        case dates, page, results
+        case page, results
         case totalPages = "total_pages"
         case totalResults = "total_results"
     }
 }
-// MARK: - Dates
-struct Dates: Codable {
-    let maximum, minimum: String?
-}
 
 // MARK: - Result
-struct ResultMovies: Codable {
+struct ResultTVShows: Codable {
     let adult: Bool?
     let backdropPath: String?
     let genreIDS: [Int]?
     let id: Int?
+    let originCountry: [String]?
     let originalLanguage: String?
-    let originalTitle, overview: String?
+    let originalName, overview: String?
     let popularity: Double?
-    let posterPath, releaseDate, title: String?
-    let video: Bool?
+    let posterPath, firstAirDate, name: String?
     let voteAverage: Double?
     let voteCount: Int?
 
@@ -44,12 +39,13 @@ struct ResultMovies: Codable {
         case backdropPath = "backdrop_path"
         case genreIDS = "genre_ids"
         case id
+        case originCountry = "origin_country"
         case originalLanguage = "original_language"
-        case originalTitle = "original_title"
+        case originalName = "original_name"
         case overview, popularity
         case posterPath = "poster_path"
-        case releaseDate = "release_date"
-        case title, video
+        case firstAirDate = "first_air_date"
+        case name
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
     }

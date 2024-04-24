@@ -1,5 +1,5 @@
 //
-//  ViewCell.swift
+//  MovieViewCell.swift
 //  TheMovieApp
 //
 //  Created by Yasemin TOK on 23.04.2024.
@@ -8,12 +8,12 @@
 import UIKit
 import Kingfisher
 
-class ViewCell: UICollectionViewCell {
+class MovieViewCell: UICollectionViewCell {
 
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     @IBOutlet weak var labelType: UILabel!
     
-    var moviesList: [String: [Result]] = ["0": []]
+    var moviesList: [String: [ResultMovies]] = ["0": []]
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +24,7 @@ class ViewCell: UICollectionViewCell {
         collectionViewDesign()
     }
     
-    func updateList(list: [String : [Result]]) {
+    func updateList(list: [String : [ResultMovies]]) {
         self.moviesList = list
         self.moviesCollectionView.reloadData()
     }
@@ -45,7 +45,7 @@ class ViewCell: UICollectionViewCell {
     }
 }
 
-extension ViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MovieViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
