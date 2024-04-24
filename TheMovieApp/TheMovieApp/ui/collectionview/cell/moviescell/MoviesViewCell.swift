@@ -8,12 +8,17 @@
 import UIKit
 import Kingfisher
 
-class MovieViewCell: UICollectionViewCell {
+protocol MoviesViewCellProtocol {
+    func didSelectItem(id: [String: Int])
+}
+
+class MoviesViewCell: UICollectionViewCell {
     
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
     var moviesList: [String: [ResultMovies]] = ["0": []]
+    var delegate: MoviesViewCellProtocol?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +50,7 @@ class MovieViewCell: UICollectionViewCell {
     }
 }
 
-extension MovieViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension MoviesViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -105,5 +110,14 @@ extension MovieViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        for (_, value) in moviesList {
+            if let id = value[indexPath.row].id {
+                delegate?.didSelectItem(id: ["movie": id])
+            }
+        }
     }
 }

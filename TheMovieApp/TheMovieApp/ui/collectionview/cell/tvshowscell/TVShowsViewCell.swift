@@ -7,12 +7,17 @@
 
 import UIKit
 
+protocol TVShowsViewCellProtocol {
+    func didSelectItem(id: [String: Int])
+}
+
 class TVShowsViewCell: UICollectionViewCell {
     
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var tvShowsCollectionView: UICollectionView!
     
     var tvShowList: [String: [ResultTVShows]] = ["0": []]
+    var delegate: TVShowsViewCellProtocol?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,7 +43,7 @@ class TVShowsViewCell: UICollectionViewCell {
         let screenWidth = UIScreen.main.bounds.width
         let itemWidth = screenWidth
         
-        design.itemSize = CGSize(width: itemWidth / 2, height: itemWidth / 1.3)
+        design.itemSize = CGSize(width: itemWidth / 2.5, height: itemWidth / 1.3)
         
         tvShowsCollectionView.collectionViewLayout = design
     }
@@ -92,5 +97,14 @@ extension TVShowsViewCell: UICollectionViewDelegate, UICollectionViewDataSource 
             }
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        for (_, value) in tvShowList {
+            if let id = value[indexPath.row].id {
+                delegate?.didSelectItem(id: ["tvShow": id])
+            }
+        }
     }
 }

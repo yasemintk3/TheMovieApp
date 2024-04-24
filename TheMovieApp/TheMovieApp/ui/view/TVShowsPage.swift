@@ -65,6 +65,7 @@ extension TVShowsPage: UICollectionViewDelegate, UICollectionViewDataSource {
         default:
             break
         }
+        cell.delegate = self
         return cell
     }
 }
@@ -79,5 +80,15 @@ extension TVShowsPage: TVShowsPageViewModelOutput {
     func updateViewPopularTV(list: [String : [ResultTVShows]]) {
         self.listPopular = list
         collectionView.reloadData()
+    }
+}
+
+extension TVShowsPage: TVShowsViewCellProtocol {
+    
+    func didSelectItem(id: [String : Int]) {
+        let detailPage = self.storyboard?.instantiateViewController(withIdentifier: "DetailPage") as! DetailPage
+        detailPage.id = id
+        detailPage.hidesBottomBarWhenPushed = true
+        self.navigationController!.pushViewController(detailPage, animated: true)
     }
 }

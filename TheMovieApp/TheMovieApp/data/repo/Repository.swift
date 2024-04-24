@@ -19,10 +19,22 @@ protocol RepositoryProtocolTVShows {
     func uploadPopular(list: [ResultTVShows])
 }
 
+protocol RepositoryProtocolDetailMovie {
+    func uploadMovieDetail(movieDetail: MovieDetail)
+    func uploadMovieCast(movieCast: [Cast])
+}
+
+protocol RepositoryProtocolDetailTVShow {
+    func uploadTVShowDetail(tvShowDetail: TVShowDetail)
+    func uploadTVShowCast(tvShowCast: [Cast])
+}
+
 class Repository {
     
     var repoProtocolMovies: RepositoryProtocolMovies?
     var repoProtocolTVShows: RepositoryProtocolTVShows?
+    var repoProtocolDetailMovie: RepositoryProtocolDetailMovie?
+    var repoProtocolDetailTVShow: RepositoryProtocolDetailTVShow?
     
     func uploadTopRatedMovies() {
         
@@ -101,6 +113,70 @@ class Repository {
                     let answer = try JSONDecoder().decode(TVShows.self, from: data)
                     if let list = answer.results {
                         self.repoProtocolTVShows?.uploadPopular(list: list)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func uploadMovieDetail(id: Int) {
+        
+        AF.request("https://api.themoviedb.org/3/movie/\(id)?api_key=7bc5ca927db5991f5c55259703847712", method: .get).response { response in
+            
+            if let data = response.data {
+                do {
+                    let movieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
+                    self.repoProtocolDetailMovie?.uploadMovieDetail(movieDetail: movieDetail)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func uploadMovieCast(id: Int) {
+        
+        AF.request("https://api.themoviedb.org/3/movie/\(id)/credits?api_key=7bc5ca927db5991f5c55259703847712", method: .get).response { response in
+            
+            if let data = response.data {
+                do {
+                    let answer = try JSONDecoder().decode(CastDetail.self, from: data)
+                    if let cast = answer.cast {
+                        self.repoProtocolDetailMovie?.uploadMovieCast(movieCast: cast)
+                    }
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func uploadTVShowDetail(id: Int) {
+        
+        AF.request("https://api.themoviedb.org/3/tv/\(id)?api_key=7bc5ca927db5991f5c55259703847712", method: .get).response { response in
+            
+            if let data = response.data {
+                do {
+                    let tvShowDetail = try JSONDecoder().decode(TVShowDetail.self, from: data)
+                    self.repoProtocolDetailTVShow?.uploadTVShowDetail(tvShowDetail: tvShowDetail)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func uploadTVShowCast(id: Int) {
+        
+        AF.request("https://api.themoviedb.org/3/tv/\(id)/credits?api_key=7bc5ca927db5991f5c55259703847712", method: .get).response { response in
+            
+            if let data = response.data {
+                do {
+                    let answer = try JSONDecoder().decode(CastDetail.self, from: data)
+                    if let cast = answer.cast {
+                        self.repoProtocolDetailTVShow?.uploadTVShowCast(tvShowCast: cast)
                     }
                 } catch {
                     print(error.localizedDescription)

@@ -54,7 +54,7 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesViewCell", for: indexPath) as! MovieViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesViewCell", for: indexPath) as! MoviesViewCell
         
         switch indexPath.row {
         case 0:
@@ -69,6 +69,7 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
         default:
             break
         }
+        cell.delegate = self
         return cell
     }
 }
@@ -94,5 +95,16 @@ extension MoviesPage: MoviesPageViewModelOutput {
             self.listPopular = list
             self.collectionView.reloadData()
         }
+    }
+}
+
+extension MoviesPage: MoviesViewCellProtocol {
+    
+    func didSelectItem(id: [String : Int]) {
+        
+        let detailPage = self.storyboard?.instantiateViewController(withIdentifier: "DetailPage") as! DetailPage
+        detailPage.id = id
+        detailPage.hidesBottomBarWhenPushed = true
+        self.navigationController!.pushViewController(detailPage, animated: true)
     }
 }
