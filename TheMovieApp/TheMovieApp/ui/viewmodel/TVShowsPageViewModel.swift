@@ -8,8 +8,8 @@
 import Foundation
 
 protocol TVShowsPageViewModelOutput {
-    func updateViewTopRated(list: [String: [ResultTVShows]])
-    func updateViewPopular(list: [String: [ResultTVShows]])
+    func updateViewTopRatedTV(list: [String: [ResultTVShows]])
+    func updateViewPopularTV(list: [String: [ResultTVShows]])
 }
 
 class TVShowsPageViewModel {
@@ -29,11 +29,12 @@ class TVShowsPageViewModel {
 }
 
 extension TVShowsPageViewModel: RepositoryProtocolTVShows {
+    
     func uploadTopRated(list: [ResultTVShows]) {
-        self.output?.updateViewTopRated(list: ["1": list])
+        self.output?.updateViewTopRatedTV(list: ["1": list])
     }
     
     func uploadPopular(list: [ResultTVShows]) {
-        self.output?.updateViewTopRated(list: ["2": list])
+        self.output?.updateViewPopularTV(list: ["2": list])
     }
 }

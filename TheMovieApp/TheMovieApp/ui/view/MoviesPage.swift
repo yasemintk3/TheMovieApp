@@ -26,6 +26,10 @@ class MoviesPage: UIViewController {
         
         collectionViewDesign()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        viewModel.uploadMovies()
+    }
 
     func collectionViewDesign() {
         
@@ -50,7 +54,7 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "viewCell", for: indexPath) as! MovieViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "moviesViewCell", for: indexPath) as! MovieViewCell
         
         switch indexPath.row {
         case 0:
@@ -71,21 +75,21 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
 
 extension MoviesPage: MoviesPageViewModelOutput {
 
-    func updateViewTopRated(list: [String: [ResultMovies]]) {
+    func updateViewTopRatedMovie(list: [String: [ResultMovies]]) {
         DispatchQueue.main.async {
             self.listTopRated = list
             self.collectionView.reloadData()
         }
     }
     
-    func updateViewNowPlaying(list: [String : [ResultMovies]]) {
+    func updateViewNowPlayingMovie(list: [String : [ResultMovies]]) {
         DispatchQueue.main.async {
             self.listNowPlaying = list
             self.collectionView.reloadData()
         }
     }
     
-    func updateViewPopular(list: [String : [ResultMovies]]) {
+    func updateViewPopularMovie(list: [String : [ResultMovies]]) {
         DispatchQueue.main.async {
             self.listPopular = list
             self.collectionView.reloadData()

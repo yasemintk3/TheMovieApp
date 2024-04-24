@@ -9,9 +9,9 @@ import UIKit
 import Kingfisher
 
 class MovieViewCell: UICollectionViewCell {
-
-    @IBOutlet weak var moviesCollectionView: UICollectionView!
+    
     @IBOutlet weak var labelType: UILabel!
+    @IBOutlet weak var moviesCollectionView: UICollectionView!
     
     var moviesList: [String: [ResultMovies]] = ["0": []]
 
