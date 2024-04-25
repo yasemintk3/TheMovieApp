@@ -9,6 +9,8 @@ import UIKit
 
 class DetailCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var imageViewCast: UIImageView!
     @IBOutlet weak var labelCastName: UILabel!
 }

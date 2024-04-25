@@ -31,10 +31,14 @@ protocol RepositoryProtocolDetailTVShow {
 
 class Repository {
     
+    // MARK: - Properties
+    
     var repoProtocolMovies: RepositoryProtocolMovies?
     var repoProtocolTVShows: RepositoryProtocolTVShows?
     var repoProtocolDetailMovie: RepositoryProtocolDetailMovie?
     var repoProtocolDetailTVShow: RepositoryProtocolDetailTVShow?
+    
+    // MARK: - Funcs
     
     func uploadTopRatedMovies() {
         

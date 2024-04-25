@@ -16,13 +16,19 @@ protocol DetailPageViewModelOutput {
 
 class DetailPageViewModel {
     
+    // MARK: - Properties
+    
     var repo = Repository()
     var output: DetailPageViewModelOutput?
+    
+    // MARK: - Initialization
     
     init() {
         repo.repoProtocolDetailMovie = self
         repo.repoProtocolDetailTVShow = self
     }
+    
+    // MARK: - Funcs
     
     func uploadDetail(id: [String: Int]) {
         
@@ -42,6 +48,8 @@ class DetailPageViewModel {
         }
     }
 }
+
+// MARK: - Extensions
 
 extension DetailPageViewModel: RepositoryProtocolDetailMovie {
 

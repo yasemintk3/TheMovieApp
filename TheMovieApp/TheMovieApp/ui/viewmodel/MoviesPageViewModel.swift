@@ -15,13 +15,19 @@ protocol MoviesPageViewModelOutput {
 
 class MoviesPageViewModel {
     
+    // MARK: - Properties
+    
     var repo = Repository()
     var output: MoviesPageViewModelOutput?
+    
+    // MARK: - Initialization
     
     init() {
         repo.repoProtocolMovies = self
         uploadMovies()
     }
+    
+    // MARK: - Funcs
     
     func uploadMovies() {
         repo.uploadTopRatedMovies()
@@ -29,6 +35,8 @@ class MoviesPageViewModel {
         repo.uploadPopularMovies()
     }
 }
+
+// MARK: - Extensions
 
 extension MoviesPageViewModel: RepositoryProtocolMovies {
 

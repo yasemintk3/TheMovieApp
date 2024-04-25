@@ -14,11 +14,15 @@ protocol MoviesViewCellProtocol {
 
 class MoviesViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var moviesCollectionView: UICollectionView!
     
     var moviesList: [String: [ResultMovies]] = ["0": []]
     var delegate: MoviesViewCellProtocol?
+    
+    // MARK: - Initialization
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +32,8 @@ class MoviesViewCell: UICollectionViewCell {
         
         collectionViewDesign()
     }
+    
+    // MARK: - Funcs
     
     func updateList(list: [String : [ResultMovies]]) {
         self.moviesList = list
@@ -49,6 +55,8 @@ class MoviesViewCell: UICollectionViewCell {
         moviesCollectionView.collectionViewLayout = design
     }
 }
+
+// MARK: - Extensions
 
 extension MoviesViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
 

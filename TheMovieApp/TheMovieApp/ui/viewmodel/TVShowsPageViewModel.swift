@@ -14,19 +14,27 @@ protocol TVShowsPageViewModelOutput {
 
 class TVShowsPageViewModel {
     
+    // MARK: - Properties
+    
     var repo = Repository()
     var output: TVShowsPageViewModelOutput?
+    
+    // MARK: - Initialization
     
     init() {
         repo.repoProtocolTVShows = self
         uploadTVShows()
     }
     
+    // MARK: - Funcs
+    
     func uploadTVShows() {
         repo.uploadTopRatedTVShows()
         repo.uploadPopularTVShows()
     }
 }
+
+// MARK: - Extensions
 
 extension TVShowsPageViewModel: RepositoryProtocolTVShows {
     

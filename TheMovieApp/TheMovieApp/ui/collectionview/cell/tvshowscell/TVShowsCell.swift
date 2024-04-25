@@ -9,6 +9,8 @@ import UIKit
 
 class TVShowsCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var imageViewTVShow: UIImageView!
     @IBOutlet weak var labelTVShowName: UILabel!
 }

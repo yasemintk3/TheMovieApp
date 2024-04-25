@@ -13,11 +13,15 @@ protocol TVShowsViewCellProtocol {
 
 class TVShowsViewCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var labelType: UILabel!
     @IBOutlet weak var tvShowsCollectionView: UICollectionView!
     
     var tvShowList: [String: [ResultTVShows]] = ["0": []]
     var delegate: TVShowsViewCellProtocol?
+    
+    // MARK: - Initialization
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +31,8 @@ class TVShowsViewCell: UICollectionViewCell {
         
         collectionViewDesign()
     }
+    
+    // MARK: - Funcs
     
     func updateList(list: [String : [ResultTVShows]]) {
         self.tvShowList = list
@@ -48,6 +54,8 @@ class TVShowsViewCell: UICollectionViewCell {
         tvShowsCollectionView.collectionViewLayout = design
     }
 }
+
+// MARK: - Extensions
 
 extension TVShowsViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     

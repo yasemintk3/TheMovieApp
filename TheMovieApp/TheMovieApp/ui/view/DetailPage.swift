@@ -9,6 +9,8 @@ import UIKit
 
 class DetailPage: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var imageViewMovie: UIImageView!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelOriginalName: UILabel!
@@ -18,6 +20,8 @@ class DetailPage: UIViewController {
     var viewModel = DetailPageViewModel()
     var id: [String: Int] = ["": 0]
     var castList: [Cast] = []
+    
+    // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,8 @@ class DetailPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         viewModel.uploadDetail(id: id)
     }
+    
+    // MARK: - Funcs
     
     func navigationControllerAppearance() {
         
@@ -80,6 +86,8 @@ class DetailPage: UIViewController {
         detailCollectionView.collectionViewLayout = design
     }
 }
+
+// MARK: - Extensions
 
 extension DetailPage: UICollectionViewDelegate, UICollectionViewDataSource {
     

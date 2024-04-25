@@ -9,12 +9,16 @@ import UIKit
 
 class MoviesPage: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     var viewModel = MoviesPageViewModel()
     var listTopRated: [String: [ResultMovies]] = ["0": []]
     var listNowPlaying: [String: [ResultMovies]] = ["0": []]
     var listPopular: [String: [ResultMovies]] = ["0": []]
+    
+    // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,8 @@ class MoviesPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         viewModel.uploadMovies()
     }
+    
+    // MARK: - Funcs
 
     func collectionViewDesign() {
         
@@ -73,6 +79,8 @@ extension MoviesPage: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
 }
+
+// MARK: - Extensions
 
 extension MoviesPage: MoviesPageViewModelOutput {
 

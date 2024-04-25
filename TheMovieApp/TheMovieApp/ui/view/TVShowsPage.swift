@@ -9,11 +9,15 @@ import UIKit
 
 class TVShowsPage: UIViewController {
     
+    // MARK: - Properties
+    
     @IBOutlet weak var collectionView: UICollectionView!
     
     var viewModel = TVShowsPageViewModel()
     var listTopRated: [String: [ResultTVShows]] = ["0": []]
     var listPopular: [String: [ResultTVShows]] = ["0": []]
+    
+    // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +33,8 @@ class TVShowsPage: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         viewModel.uploadTVShows()
     }
+    
+    // MARK: - Funcs
 
     func collectionViewDesign() {
         
@@ -44,6 +50,8 @@ class TVShowsPage: UIViewController {
         collectionView.collectionViewLayout = design
     }
 }
+
+// MARK: - Extensions
 
 extension TVShowsPage: UICollectionViewDelegate, UICollectionViewDataSource {
     
