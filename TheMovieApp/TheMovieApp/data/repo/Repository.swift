@@ -19,14 +19,10 @@ protocol RepositoryProtocolTVShows {
     func uploadPopular(list: [ResultTVShows])
 }
 
-protocol RepositoryProtocolDetailMovie {
+protocol RepositoryProtocolDetail {
     func uploadMovieDetail(movieDetail: MovieDetail)
-    func uploadMovieCast(movieCast: [Cast])
-}
-
-protocol RepositoryProtocolDetailTVShow {
+    func uploadCast(cast: [Cast])
     func uploadTVShowDetail(tvShowDetail: TVShowDetail)
-    func uploadTVShowCast(tvShowCast: [Cast])
 }
 
 class Repository {
@@ -35,8 +31,7 @@ class Repository {
     
     var repoProtocolMovies: RepositoryProtocolMovies?
     var repoProtocolTVShows: RepositoryProtocolTVShows?
-    var repoProtocolDetailMovie: RepositoryProtocolDetailMovie?
-    var repoProtocolDetailTVShow: RepositoryProtocolDetailTVShow?
+    var repoProtocolDetail: RepositoryProtocolDetail?
     
     // MARK: - Funcs
     
@@ -132,7 +127,7 @@ class Repository {
             if let data = response.data {
                 do {
                     let movieDetail = try JSONDecoder().decode(MovieDetail.self, from: data)
-                    self.repoProtocolDetailMovie?.uploadMovieDetail(movieDetail: movieDetail)
+                    self.repoProtocolDetail?.uploadMovieDetail(movieDetail: movieDetail)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -148,7 +143,7 @@ class Repository {
                 do {
                     let answer = try JSONDecoder().decode(CastDetail.self, from: data)
                     if let cast = answer.cast {
-                        self.repoProtocolDetailMovie?.uploadMovieCast(movieCast: cast)
+                        self.repoProtocolDetail?.uploadCast(cast: cast)
                     }
                 } catch {
                     print(error.localizedDescription)
@@ -164,7 +159,7 @@ class Repository {
             if let data = response.data {
                 do {
                     let tvShowDetail = try JSONDecoder().decode(TVShowDetail.self, from: data)
-                    self.repoProtocolDetailTVShow?.uploadTVShowDetail(tvShowDetail: tvShowDetail)
+                    self.repoProtocolDetail?.uploadTVShowDetail(tvShowDetail: tvShowDetail)
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -180,7 +175,7 @@ class Repository {
                 do {
                     let answer = try JSONDecoder().decode(CastDetail.self, from: data)
                     if let cast = answer.cast {
-                        self.repoProtocolDetailTVShow?.uploadTVShowCast(tvShowCast: cast)
+                        self.repoProtocolDetail?.uploadCast(cast: cast)
                     }
                 } catch {
                     print(error.localizedDescription)

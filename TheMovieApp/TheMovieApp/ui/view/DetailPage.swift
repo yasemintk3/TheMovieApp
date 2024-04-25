@@ -113,22 +113,17 @@ extension DetailPage: UICollectionViewDelegate, UICollectionViewDataSource {
 }
 
 extension DetailPage: DetailPageViewModelOutput {
-    
+
     func updateMovieDetail(movieDetail: MovieDetail) {
         updateDetailMovie(detail: movieDetail)
     }
     
-    func updateMovieCast(movieCast: [Cast]) {
-        self.castList = movieCast
+    func updateCast(cast: [Cast]) {
+        self.castList = cast
         self.detailCollectionView.reloadData()
     }
     
     func updateTVShowDetail(tvShowDetail: TVShowDetail) {
         updateDetailTVShow(detail: tvShowDetail)
-    }
-    
-    func updateTVShowCast(tvShowCast: [Cast]) {
-        self.castList = tvShowCast
-        self.detailCollectionView.reloadData()
     }
 }

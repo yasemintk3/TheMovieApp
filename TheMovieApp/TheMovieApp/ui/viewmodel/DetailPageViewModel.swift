@@ -9,9 +9,8 @@ import Foundation
 
 protocol DetailPageViewModelOutput {
     func updateMovieDetail(movieDetail: MovieDetail)
-    func updateMovieCast(movieCast: [Cast])
+    func updateCast(cast: [Cast])
     func updateTVShowDetail(tvShowDetail: TVShowDetail)
-    func updateTVShowCast(tvShowCast: [Cast])
 }
 
 class DetailPageViewModel {
@@ -24,8 +23,7 @@ class DetailPageViewModel {
     // MARK: - Initialization
     
     init() {
-        repo.repoProtocolDetailMovie = self
-        repo.repoProtocolDetailTVShow = self
+        repo.repoProtocolDetail = self
     }
     
     // MARK: - Funcs
@@ -51,24 +49,17 @@ class DetailPageViewModel {
 
 // MARK: - Extensions
 
-extension DetailPageViewModel: RepositoryProtocolDetailMovie {
+extension DetailPageViewModel: RepositoryProtocolDetail {
 
     func uploadMovieDetail(movieDetail: MovieDetail) {
         self.output?.updateMovieDetail(movieDetail: movieDetail)
     }
     
-    func uploadMovieCast(movieCast: [Cast]) {
-        self.output?.updateMovieCast(movieCast: movieCast)
+    func uploadCast(cast: [Cast]) {
+        self.output?.updateCast(cast: cast)
     }
-}
-
-extension DetailPageViewModel: RepositoryProtocolDetailTVShow {
     
     func uploadTVShowDetail(tvShowDetail: TVShowDetail) {
         self.output?.updateTVShowDetail(tvShowDetail: tvShowDetail)
-    }
-    
-    func uploadTVShowCast(tvShowCast: [Cast]) {
-        self.output?.updateTVShowCast(tvShowCast: tvShowCast)
     }
 }
